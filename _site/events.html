@@ -1,0 +1,33 @@
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+
+
+<div id="items-list">
+
+  day: <input
+    v-model="dayitem"
+  >
+
+  name: <input
+    v-model="nameitem"
+  >
+
+  <!-- v-on:keyup.enter="addItem" -->
+  <button v-on:click="addItem">add</button>
+
+
+  <ul>
+    <li
+      is="item-element"
+      v-for="(itm, index) in sortNumbers"
+      v-bind:item="itm"
+      v-on:remove="itemsList.splice(index, 1)"
+    >
+    </li>
+  </ul>
+
+
+
+
+<!-- <script src="app.js"></script> -->
+<script src="events-app.js"></script>

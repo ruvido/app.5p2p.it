@@ -1,0 +1,27 @@
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+
+
+<div id="items-list">
+  <input
+    v-model="item"
+    v-on:keyup.enter="addItem"
+  >
+
+  <ul>
+    <li
+      is="item-element"
+      v-for="(itm, index) in itemsList"
+      v-bind:text="itm"
+      v-on:remove="itemsList.splice(index, 1)"
+    >
+    </li>
+  </ul>
+
+</div>
+
+
+
+
+<!-- <script src="app.js"></script> -->
+<script src="app.js"></script>

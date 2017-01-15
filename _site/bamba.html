@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Row Component</title>
+</head>
+
+<body>
+    <div id="app">
+            <my-item v-for="(row, index) in rows"
+                    :itemdata="itemList"
+                    :row="row"
+                    v-on:remove="removeRow(index)">
+            </my-item>
+            {{rows}}
+        <div>
+            <button @click="addRow"> Add sdfds Row </button>
+        </div>
+    </div>
+
+<template id="item-template">
+    <div>
+        <select v-model="row.code">
+            <option v-for="item in itemdata"  :value="item"> {{ item.code }} </option>
+        </select>
+        <input type="text" placeholder="Text" v-model="row.description">
+        <input type="text" placeholder="value" v-model="row.unitprice">
+        <button v-on:click= "remove"> X </button>
+    </div>
+</template>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.6/vue.js"></script>
+<script>
+
+Vue.component('my-item', {
+    props: ['itemdata', 'row'],
+    template: '#item-template',
+    data: function () {
+        return {
+        selected: this.itemdata[0]
+        }
+    },
+    methods: {
+        remove() {
+            this.$emit('remove');
+        }
+    }
+}),
+
+new Vue({
+    el: "#app",
+    data: {
+        rows: [],
+    	itemList: [
+            { code: 'Select an Item', description: '', unitprice: ''},
+			{ code: 'One', description: 'Item A', unitprice: '10'},
+			{ code: 'Two', description: 'Item B', unitprice: '22'},
+			{ code: 'Three', description: 'Item C', unitprice: '56'}
+        ]
+    },
+
+    methods: {
+        addRow(){
+           this.rows.push({description: '', unitprice: '' , code: ''}); // what to push unto the rows array?
+        },
+        removeRow(index){
+           this.rows.splice(index,1); // why is this removing only the last row?
+        }
+    }
+})
+</script>
+</body>
+</html>
